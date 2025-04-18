@@ -24,16 +24,16 @@ class CyanClient(commands.Bot):
             await self.load_extension("modules.music")
             print("modules.music loaded")
         except Exception as e:
-            print("Error loading module: " + e)
+            print(f"Error loading module: {e}")
             
-        # Sync commands
+        # Uncomment to sync commands
         try:
             self.tree.copy_global_to(guild=setting.admin_guild_id)
-            await self.tree.sync(guild=setting.admin_guild_id)
-            print("Commands synced")
+            synced_commands = await self.tree.sync(guild=setting.admin_guild_id)
+            print(f"Synced {len(synced_commands)} commands")
         except Exception as e:
-            print("Error syncing commands: " + e)
- 
+            print(f"Error syncing commands: {e}")
+            
 client = CyanClient()
 
 @client.event
